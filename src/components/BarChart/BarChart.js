@@ -1,10 +1,11 @@
-import { scaleBand, scaleLinear, max } from 'd3';
+import { scaleBand, scaleLinear, max, format } from 'd3';
 import { map, prop } from 'ramda';
 
 import useData from 'hooks/useData';
 import XAxis from 'components/XAxis';
 import YAxis from 'components/YAxis';
 import Bars from 'components/Bars';
+import AxisLabel from 'components/AxisLabel';
 
 export default function BarChart() {
   const data = useData();
@@ -14,8 +15,8 @@ export default function BarChart() {
 
   const margin = {
     top: 20,
-    right: 20,
-    bottom: 20,
+    right: 60,
+    bottom: 80,
     left: 200,
   };
 
@@ -25,9 +26,12 @@ export default function BarChart() {
   const xValue = prop('Population');
   const yValue = prop('Country');
 
+  const formatTick = format('.2s');
+
   const yScale = scaleBand()
     .domain(map(yValue, data))
-    .range([0, innerHeight]);
+    .range([0, innerHeight])
+    .paddingInner(0.1);
 
   const xScale = scaleLinear()
     .domain([0, max(data, xValue)])
@@ -39,14 +43,22 @@ export default function BarChart() {
         <XAxis
           xScale={xScale}
           innerHeight={innerHeight}
+          formatTick={formatTick}
         />
         <YAxis yScale={yScale} />
+        <AxisLabel
+          innerHeight={innerHeight}
+          innerWidth={innerWidth}
+        >
+          Population
+        </AxisLabel>
         <Bars
           data={data}
           xScale={xScale}
           yScale={yScale}
           xValue={xValue}
           yValue={yValue}
+          formatTick={formatTick}
         />
       </g>
     </svg>

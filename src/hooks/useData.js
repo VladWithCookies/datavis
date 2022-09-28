@@ -8,7 +8,7 @@ const useData = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const row = (item) => ({ ...item, Population: parseFloat(item['2020']) });
+    const row = (item) => ({ ...item, Population: parseFloat(item['2020']) * 1000 });
 
     csv(POPULATION_DATA_URL, row).then((data) => setData(slice(0, 10, data)));
   }, []);

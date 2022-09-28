@@ -1,6 +1,8 @@
 import { map } from 'ramda';
 
-export default function  XAxis({ xScale, innerHeight }) {
+import styles from './XAxis.module.css';
+
+export default function  XAxis({ xScale, innerHeight, formatTick }) {
   return map((tick) => (
     <g
       key={tick}
@@ -8,14 +10,14 @@ export default function  XAxis({ xScale, innerHeight }) {
     >
       <line
         y2={innerHeight}
-        stroke="black"
+        className={styles.line}
       />
       <text
         y={innerHeight + 3}
         dy="0.71em"
-        style={{ textAnchor: 'middle' }}
+        className={styles.text}
       >
-        {tick}
+        {formatTick(tick)}
       </text>
     </g>
   ), xScale.ticks());
