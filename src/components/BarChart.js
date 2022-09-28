@@ -20,7 +20,7 @@ export default function BarChart() {
     top: 20,
     right: 20,
     bottom: 20,
-    left: 20,
+    left: 200,
   };
 
   const innerHeight = height - margin.top - margin.bottom;
@@ -37,6 +37,32 @@ export default function BarChart() {
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
+        {map((tick) => (
+          <g transform={`translate(${xScale(tick)}, 0)`}>
+            <line
+              key={tick}
+              y2={innerHeight}
+              stroke="black"
+            />
+            <text
+              y={innerHeight + 3}
+              dy="0.71em"
+              style={{ textAnchor: 'middle' }}
+            >
+              {tick}
+            </text>
+          </g>
+        ), xScale.ticks())}
+        {map((tick) => (
+          <text
+            x={-3}
+            y={yScale(tick) + yScale.bandwidth() / 2}
+            dy="0.32em"
+            style={{ textAnchor: 'end' }}
+          >
+            {tick}
+          </text>
+        ), yScale.domain())}
         {map((item) => (
           <rect
             key={item['Country']}
