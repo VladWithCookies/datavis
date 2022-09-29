@@ -1,17 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { slice } from 'ramda';
 import { csv } from 'd3';
 
-import { POPULATION_DATA_URL } from 'constants/data';
-
-const useData = () => {
+const useData = (url, { selector, limit }) => {
   const [data, setData] = useState([]);
+  const row = useCallback(selector, []);
 
   useEffect(() => {
-    const row = (item) => ({ ...item, Population: parseFloat(item['2020']) * 1000 });
-
-    csv(POPULATION_DATA_URL, row).then((data) => setData(slice(0, 10, data)));
-  }, []);
+    csv(url, row).then((data) => setData(limit ? slice(0, limit, data) : data));
+  }, [url, row]);
 
   return data;
 };

@@ -1,0 +1,18 @@
+.tick {
+  fill: #635f5d;
+  text-anchor: end;
+}
+
+.point {
+  fill: #137880;
+}
+
+.line {
+  stroke: #c0c0bb;
+}
+
+.label {
+  fill: #635f5d;
+  text-anchor: middle;
+  font-size: 1.5em;
+}
