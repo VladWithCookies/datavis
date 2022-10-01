@@ -8,7 +8,7 @@ const useData = (url, { selector, limit }) => {
 
   useEffect(() => {
     csv(url, row).then((data) => setData(limit ? slice(0, limit, data) : data));
-  }, [url, row]);
+  }, [url, row, limit]);
 
   return data;
 };

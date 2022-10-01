@@ -9,6 +9,9 @@ export default function Home() {
       <li>
         <Link to="/scatter-plot">Scatter Plot</Link>
       </li>
+      <li>
+        <Link to="/line-chart">LineChart</Link>
+      </li>
     </ul>
   );
 }

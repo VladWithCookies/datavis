@@ -3,8 +3,12 @@
   text-anchor: end;
 }
 
-.point {
-  fill: #137880;
+.line {
+  fill: none;
+  stroke: #137880;
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
 }
 
 .scale {

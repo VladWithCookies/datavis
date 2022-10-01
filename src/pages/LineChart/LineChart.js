@@ -1,17 +1,17 @@
-import { prop, map } from 'ramda';
-import { scaleLinear, extent } from 'd3';
+import { prop, map, compose } from 'ramda';
+import { scaleTime, scaleLinear, extent, timeFormat, line, curveNatural } from 'd3';
 
-import { IRIS_DATA_URL } from 'constants/data';
+import { TEMPERATURE_DATA_URL } from 'constants/data';
 import useData from 'hooks/useData';
-import styles from './ScatterChart.module.css';
+import styles from './LineChart.module.css';
 
-export default function ScatterChart() {
+export default function LineChart() {
   const selector = (item) => ({
-    sepalLength: parseFloat(item.sepal_length),
-    petalLength: parseFloat(item.petal_length),
+    temperature: parseFloat(item.temperature),
+    timestamp: new Date(item.timestamp),
   });
 
-  const data = useData(IRIS_DATA_URL, { selector });
+  const data = useData(TEMPERATURE_DATA_URL, { selector });
 
   const height = 768;
   const width = 1024;
@@ -26,17 +26,19 @@ export default function ScatterChart() {
   const innerHeight = height - margin.top - margin.bottom;
   const innerWidth = width - margin.right - margin.left;
 
-  const xValue = prop('sepalLength');
-  const yValue = prop('petalLength');
+  const xValue = prop('timestamp');
+  const yValue = prop('temperature');
 
-  const xScale = scaleLinear()
+  const formatTick = timeFormat('%a');
+
+  const xScale = scaleTime()
     .domain(extent(data, xValue))
     .range([0, innerWidth])
     .nice();
 
   const yScale = scaleLinear()
     .domain(extent(data, yValue))
-    .range([0, innerHeight])
+    .range([innerHeight, 0])
     .nice();
 
   return (
@@ -56,7 +58,7 @@ export default function ScatterChart() {
               dy="0.71em"
               className={styles.tick}
             >
-              {tick}
+              {formatTick(tick)}
             </text>
           </g>
         ), xScale.ticks())}
@@ -64,7 +66,7 @@ export default function ScatterChart() {
           className={styles.label}
           transform={`translate(-50, ${innerHeight / 2}) rotate(-90)`}
         >
-          Petal Length
+          Temperature
         </text>
         {map((tick) => (
           <g
@@ -91,19 +93,17 @@ export default function ScatterChart() {
           y={innerHeight + 50}
           className={styles.label}
         >
-          Sepal Length
+          Time
         </text>
-        {map((item) => (
-          <circle
-            cx={xScale(xValue(item))}
-            cy={yScale(yValue(item))}
-            r={5}
-            className={styles.point}
-          >
-            <title>{xValue(item)}</title>
-          </circle>
-        ), data)}
+        <path
+          className={styles.line}
+          d={line()
+            .x(compose(xScale, xValue))
+            .y(compose(yScale, yValue))
+            .curve(curveNatural)(data)
+          }
+        />
       </g>
     </svg>
   );
-}
+};

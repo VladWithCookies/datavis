@@ -50,7 +50,7 @@ export default function BarChart() {
           >
             <line
               y2={innerHeight}
-              className={styles.line}
+              className={styles.scale}
             />
             <text
               y={innerHeight + 10}
