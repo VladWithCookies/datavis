@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { slice } from 'ramda';
 import { csv } from 'd3';
 
-const useData = (url, { selector, limit }) => {
+const useCSVData = (url, { selector, limit }) => {
   const [data, setData] = useState([]);
   const row = useCallback(selector, []);
 
@@ -13,4 +13,4 @@ const useData = (url, { selector, limit }) => {
   return data;
 };
 
-export default useData;
+export default useCSVData;

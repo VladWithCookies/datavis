@@ -2,7 +2,7 @@ import { prop, map } from 'ramda';
 import { scaleLinear, extent } from 'd3';
 
 import { IRIS_DATA_URL } from 'constants/data';
-import useData from 'hooks/useData';
+import useCSVData from 'hooks/useCSVData';
 import styles from './ScatterChart.module.css';
 
 export default function ScatterChart() {
@@ -11,7 +11,7 @@ export default function ScatterChart() {
     petalLength: parseFloat(item.petal_length),
   });
 
-  const data = useData(IRIS_DATA_URL, { selector });
+  const data = useCSVData(IRIS_DATA_URL, { selector });
 
   const height = 768;
   const width = 1024;

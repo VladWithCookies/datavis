@@ -1,0 +1,17 @@
+.land {
+  fill: #137b80;
+}
+
+.sphere {
+  fill: #ececec;
+}
+
+.interiors {
+  fill: none;
+  stroke: #339496;
+}
+
+.graticule {
+  fill: none;
+  stroke: #dadada;
+}

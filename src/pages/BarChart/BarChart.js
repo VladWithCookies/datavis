@@ -2,16 +2,16 @@ import { scaleBand, scaleLinear, max, format } from 'd3';
 import { map, prop } from 'ramda';
 
 import { POPULATION_DATA_URL } from 'constants/data';
-import useData from 'hooks/useData';
+import useCSVData from 'hooks/useCSVData';
 import styles from './BarChart.module.css';
 
 export default function BarChart() {
   const selector = (item) => ({
     country: item['Country'],
-    population: parseFloat(item['2020']) * 1000
+    population: parseFloat(item['2020']) * 1000,
   });
 
-  const data = useData(POPULATION_DATA_URL, { selector, limit: 10 });
+  const data = useCSVData(POPULATION_DATA_URL, { selector, limit: 10 });
 
   const height = 768;
   const width = 1024;

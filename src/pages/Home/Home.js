@@ -10,7 +10,10 @@ export default function Home() {
         <Link to="/scatter-plot">Scatter Plot</Link>
       </li>
       <li>
-        <Link to="/line-chart">LineChart</Link>
+        <Link to="/line-chart">Line Chart</Link>
+      </li>
+      <li>
+        <Link to="/world-map">World Map</Link>
       </li>
     </ul>
   );

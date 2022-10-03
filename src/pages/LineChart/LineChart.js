@@ -2,7 +2,7 @@ import { prop, map, compose } from 'ramda';
 import { scaleTime, scaleLinear, extent, timeFormat, line, curveNatural } from 'd3';
 
 import { TEMPERATURE_DATA_URL } from 'constants/data';
-import useData from 'hooks/useData';
+import useCSVData from 'hooks/useCSVData';
 import styles from './LineChart.module.css';
 
 export default function LineChart() {
@@ -11,7 +11,7 @@ export default function LineChart() {
     timestamp: new Date(item.timestamp),
   });
 
-  const data = useData(TEMPERATURE_DATA_URL, { selector });
+  const data = useCSVData(TEMPERATURE_DATA_URL, { selector });
 
   const height = 768;
   const width = 1024;
