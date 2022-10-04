@@ -8,7 +8,7 @@ export default function Dropdown({ id, label, value, onChange, options }) {
   };
 
   return (
-    <>
+    <div>
       <label
         htmlFor={id}
         className={styles.label}
@@ -30,6 +30,6 @@ export default function Dropdown({ id, label, value, onChange, options }) {
           </option>
         ), options)}
       </select>
-    </>
+    </div>
   );
 };

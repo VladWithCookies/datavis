@@ -3,10 +3,6 @@
   text-anchor: end;
 }
 
-.point {
-  fill: #137880;
-}
-
 .scale {
   stroke: #c0c0bb;
 }
@@ -15,4 +11,17 @@
   fill: #635f5d;
   text-anchor: middle;
   font-size: 1.5em;
+}
+
+.menus {
+  width: 1024px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.legendText {
+  fill: #635f5d;
+  cursor: default;
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { prop, map, find, propEq } from 'ramda';
-import { scaleLinear, extent } from 'd3';
+import { prop, map, find, propEq, filter } from 'ramda';
+import { scaleLinear, scaleOrdinal, extent } from 'd3';
 
 import { IRIS_DATA_URL } from 'constants/data';
 import useCSVData from 'hooks/useCSVData';
@@ -13,6 +13,7 @@ export default function ScatterChart() {
     petalLength: parseFloat(item.petal_length),
     sepalWidth: parseFloat(item.sepal_width),
     petalWidth: parseFloat(item.petal_width),
+    species: item.species,
   });
 
   const data = useCSVData(IRIS_DATA_URL, { selector });
@@ -21,6 +22,7 @@ export default function ScatterChart() {
 
   const [xAttribute, setXAttribute] = useState(initialXAttribute);
   const [yAttribute, setYAttribute] = useState(initialYAttribute);
+  const [hoveredSpecies, setHoveredSpecies] = useState();
 
   const options = [
     { value: 'sepalLength', label: 'Sepal Length' },
@@ -33,15 +35,19 @@ export default function ScatterChart() {
 
   const xValue = prop(xAttribute);
   const yValue = prop(yAttribute);
+  const colorValue = prop('species');
+
   const xLabel = getLabel(xAttribute);
   const yLabel = getLabel(yAttribute);
 
-  const height = 768;
-  const width = 1024;
+  const filteredData = filter((item) => hoveredSpecies === colorValue(item), data);
+
+  const height = 730;
+  const width = 1164;
 
   const margin = {
     top: 20,
-    right: 60,
+    right: 200,
     bottom: 80,
     left: 100,
   };
@@ -59,22 +65,28 @@ export default function ScatterChart() {
     .range([0, innerHeight])
     .nice();
 
+  const colorScale = scaleOrdinal()
+    .domain(map(colorValue, data))
+    .range(['#e6842a', '#137b80', '#8e6c8a']);
+
   return (
     <>
-      <Dropdown
-        id="x"
-        label="X:"
-        value={xAttribute}
-        onChange={setXAttribute}
-        options={options}
-      />
-      <Dropdown
-        id="y"
-        label="Y:"
-        value={yAttribute}
-        onChange={setYAttribute}
-        options={options}
-      />
+      <div className={styles.menus}>
+        <Dropdown
+          id="x"
+          label="X"
+          value={xAttribute}
+          onChange={setXAttribute}
+          options={options}
+        />
+        <Dropdown
+          id="y"
+          label="Y"
+          value={yAttribute}
+          onChange={setYAttribute}
+          options={options}
+        />
+      </div>
       <svg width={width} height={height}>
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           {map((tick) => (
@@ -128,16 +140,58 @@ export default function ScatterChart() {
           >
             {yLabel}
           </text>
+          <g opacity={hoveredSpecies ? 0.5 : 1}>
+            {map((item) => (
+              <circle
+                cx={xScale(xValue(item))}
+                cy={yScale(yValue(item))}
+                r={7}
+                fill={colorScale(colorValue(item))}
+              >
+                <title>{xValue(item)}</title>
+              </circle>
+            ), data)}
+          </g>
           {map((item) => (
             <circle
               cx={xScale(xValue(item))}
               cy={yScale(yValue(item))}
-              r={5}
-              className={styles.point}
+              r={7}
+              fill={colorScale(colorValue(item))}
             >
               <title>{xValue(item)}</title>
             </circle>
-          ), data)}
+          ), filteredData)}
+          <g transform={`translate(${innerWidth + 50}, 40)`}>
+            <text
+              x={35}
+              y={-25}
+              className={styles.label}
+            >
+              Species
+            </text>
+            {colorScale.domain().map((item, index) => (
+              <g
+                key={item}
+                onMouseEnter={() => setHoveredSpecies(item)}
+                onMouseOut={() => setHoveredSpecies(null)}
+                transform={`translate(0, ${index * 20})`}
+                opacity={hoveredSpecies === item ? 0.5 : 1}
+              >
+                <circle
+                  r={7}
+                  fill={colorScale(item)}
+                />
+                <text
+                  x={10}
+                  dy="0.32em"
+                  className={styles.legendText}
+                >
+                  {item}
+                </text>
+              </g>
+            ))}
+          </g>
         </g>
       </svg>
     </>
