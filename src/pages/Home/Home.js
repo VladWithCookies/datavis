@@ -15,6 +15,9 @@ export default function Home() {
       <li>
         <Link to="/world-map">World Map</Link>
       </li>
+      <li>
+        <Link to="/histogram">Histogram</Link>
+      </li>
     </ul>
   );
 }

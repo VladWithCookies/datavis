@@ -5,9 +5,9 @@ import { scaleLinear, scaleOrdinal, extent } from 'd3';
 import { IRIS_DATA_URL } from 'constants/data';
 import useCSVData from 'hooks/useCSVData';
 import Dropdown from 'components/Dropdown';
-import styles from './ScatterChart.module.css';
+import styles from './ScatterPlot.module.css';
 
-export default function ScatterChart() {
+export default function ScatterPlot() {
   const selector = (item) => ({
     sepalLength: parseFloat(item.sepal_length),
     petalLength: parseFloat(item.petal_length),

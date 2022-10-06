@@ -4,9 +4,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import BarChart from './pages/BarChart';
-import ScatterChart from './pages/ScatterChart';
+import ScatterPlot from './pages/ScatterPlot';
 import LineChart from './pages/LineChart';
 import WorldMap from './pages/WorldMap';
+import Histogram from './pages/Histogram';
 
 import './index.css';
 
@@ -18,9 +19,10 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/bar-chart" element={<BarChart />} />
-        <Route path="/scatter-plot" element={<ScatterChart />} />
+        <Route path="/scatter-plot" element={<ScatterPlot />} />
         <Route path="/line-chart" element={<LineChart />} />
         <Route path="/world-map" element={<WorldMap />} />
+        <Route path="/histogram" element={<Histogram />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
