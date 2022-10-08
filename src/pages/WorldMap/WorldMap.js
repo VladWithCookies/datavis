@@ -13,8 +13,8 @@ export default function WorldMap() {
     population: parseFloat(item.population),
   });
 
-  const data = useGeoData(GEO_DATA_URL);
-  const cities = useCSVData(CITIES_DATA_URL, { selector });
+  const geoData = useGeoData(GEO_DATA_URL);
+  const data = useCSVData(CITIES_DATA_URL, { selector });
 
   const height = 500;
   const width = 1024;
@@ -26,12 +26,12 @@ export default function WorldMap() {
   const sizeValue = prop('population');
 
   const sizeScale = scaleSqrt()
-    .domain([0, max(cities, sizeValue)])
+    .domain([0, max(data, sizeValue)])
     .range([0, 15]);
 
-  if (!data) return null;
+  if (!geoData || !data) return null;
 
-  const { land, interiors } = data;
+  const { land, interiors } = geoData;
 
   return (
     <div className={styles.container}>
@@ -65,7 +65,7 @@ export default function WorldMap() {
               className={styles.point}
             />
           );
-        }, cities)}
+        }, data)}
       </svg>
     </div>
   );

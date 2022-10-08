@@ -8,6 +8,7 @@ import ScatterPlot from './pages/ScatterPlot';
 import LineChart from './pages/LineChart';
 import WorldMap from './pages/WorldMap';
 import Histogram from './pages/Histogram';
+import ChoroplethMap from 'pages/ChoroplethMap';
 
 import './index.css';
 
@@ -23,6 +24,7 @@ root.render(
         <Route path="/line-chart" element={<LineChart />} />
         <Route path="/world-map" element={<WorldMap />} />
         <Route path="/histogram" element={<Histogram />} />
+        <Route path="/choropleth-map" element={<ChoroplethMap />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

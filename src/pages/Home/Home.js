@@ -18,6 +18,9 @@ export default function Home() {
       <li>
         <Link to="/histogram">Histogram</Link>
       </li>
+      <li>
+        <Link to="/choropleth-map">Choropleth Map</Link>
+      </li>
     </ul>
   );
 }

@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.sphere {
+  fill: #ececec;
+}
+
+.interiors {
+  fill: none;
+  stroke: #c3c3c3;
+}
+
+.graticule {
+  fill: none;
+  stroke: #dadada;
+}
+
+.point {
+  fill: #137b80;
+  opacity: 0.3;
+}

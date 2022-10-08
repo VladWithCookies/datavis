@@ -9,6 +9,7 @@ const useGeoData = (url) => {
   useEffect(() => {
     json(url).then((data) => setData({
       land: feature(data, data.objects.land),
+      countries: feature(data, data.objects.countries),
       interiors: mesh(data, data.objects.countries, (a, b) => not(equals(a, b))),
     }));
   }, [url]);
