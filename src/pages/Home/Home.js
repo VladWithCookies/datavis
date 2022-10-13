@@ -21,6 +21,9 @@ export default function Home() {
       <li>
         <Link to="/choropleth-map">Choropleth Map</Link>
       </li>
+      <li>
+        <Link to="/graph-diagram">Graph Diagram</Link>
+      </li>
     </ul>
   );
 }
