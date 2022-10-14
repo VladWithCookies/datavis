@@ -13,7 +13,7 @@ export default function Home() {
         <Link to="/line-chart">Line Chart</Link>
       </li>
       <li>
-        <Link to="/world-map">World Map</Link>
+        <Link to="/bubble-map">Bubble Map</Link>
       </li>
       <li>
         <Link to="/histogram">Histogram</Link>
@@ -23,6 +23,9 @@ export default function Home() {
       </li>
       <li>
         <Link to="/graph-diagram">Graph Diagram</Link>
+      </li>
+      <li>
+        <Link to="/pie-chart">Pie Chart</Link>
       </li>
     </ul>
   );

@@ -6,10 +6,11 @@ import Home from 'pages/Home';
 import BarChart from 'pages/BarChart';
 import ScatterPlot from 'pages/ScatterPlot';
 import LineChart from 'pages/LineChart';
-import WorldMap from 'pages/WorldMap';
+import BubbleMap from 'pages/BubbleMap';
 import Histogram from 'pages/Histogram';
 import ChoroplethMap from 'pages/ChoroplethMap';
 import GraphDiagram from 'pages/GraphDiagram';
+import PieChart from 'pages/PieChart';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,10 +23,11 @@ root.render(
         <Route path="/bar-chart" element={<BarChart />} />
         <Route path="/scatter-plot" element={<ScatterPlot />} />
         <Route path="/line-chart" element={<LineChart />} />
-        <Route path="/world-map" element={<WorldMap />} />
+        <Route path="/bubble-map" element={<BubbleMap />} />
         <Route path="/histogram" element={<Histogram />} />
         <Route path="/choropleth-map" element={<ChoroplethMap />} />
         <Route path="/graph-diagram" element={<GraphDiagram />} />
+        <Route path="/pie-chart" element={<PieChart />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

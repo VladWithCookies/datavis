@@ -4,9 +4,9 @@ import { geoNaturalEarth1, geoPath, geoGraticule, scaleSqrt, max } from 'd3';
 import { CITIES_DATA_URL, GEO_DATA_URL } from 'constants/data';
 import useGeoData from 'hooks/useGeoData';
 import useCSVData from 'hooks/useCSVData';
-import styles from './WorldMap.module.css';
+import styles from './BubbleMap.module.css';
 
-export default function WorldMap() {
+export default function BubbleMap() {
   const selector = (item) => ({
     lat: parseFloat(item.lat),
     lng: parseFloat(item.lng),
